@@ -314,7 +314,6 @@ public class LocateMeActivity extends AppCompatActivity implements View.OnClickL
 
                 route_direct(tempX*50-30,tempY*50-450,rpX+50,rpY+100);
             } else{
-                Toast.makeText(this, String.valueOf(poss), Toast.LENGTH_SHORT).show();
                 rp1.setVisibility(View.VISIBLE);
                 rp1.setX(room[poss][0]);
                 rp1.setY(room[poss][1]);
@@ -344,8 +343,11 @@ public class LocateMeActivity extends AppCompatActivity implements View.OnClickL
                     tvLocation.setText("Location: Not Found");
                 } else {
                     //ubah locate me sesuai korrdinat referensi point terdekat
+                    String locationValue = Utils.reduceDecimalPlaces(loc.getLocation());
+                    tvLocation.setText("Location: " + loc.getLocation());
                     LocDistance theNearestPoint = Utils.getTheNearestPoint(loc);
-                    String lokasi = theNearestPoint.getLocation();
+                    String lokasi = loc.getLocation();  // metode awal
+                    //String lokasi = theNearestPoint.getLocation(); // langsung ambil rp terdekat
                     Log.w("nearest", lokasi);
                     String[] coordinate = lokasi.split(" ");
                     DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
